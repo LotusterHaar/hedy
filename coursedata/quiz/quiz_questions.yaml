@@ -1,0 +1,28 @@
+﻿quiz_title: "Quiz level 1"
+level: 1
+questions:
+    - 1:
+            question_text: "Hoe vraag je: Wat is je lievelingskleur?"
+            code: "..."
+            mp_choice_answers: [
+                "print Wat is je lievelingskleur?",
+                "ask print Wat is je lievelingskleur?",
+                "ask Wat is je lievelingskleur?",
+                "echo Wat is je lievelingskleur?"]
+            correct_answer: C
+            explanation: "met 'ask' kun je iets vragen"
+            question_score: 5
+    - 2:
+            question_text: "Hoe print je een voornaam een naam die geprint wordt" 
+            code: "..."
+            mp_choice_answers: [
+                    "voornaam =  Jan\n print Ik heet voornaam",
+                    "print Ik heet is Jan",
+                    "print Ik heet is voornaam" ,
+                    "voornaam is Jan
+                     print Ik heet is voornaam",
+                     "voornaam is Jan
+                     print Ik heet voornaam"]
+            correct_answer: D
+            explanation: "Een woord een naam geven met `is`."
+            question_score: 10
