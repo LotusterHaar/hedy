@@ -9,7 +9,7 @@
 		},
 		"level": {
 			"type": "integer",
-			"description": "Short title of the quiz"
+			"description": "Level number of the quiz"
 		},
 		"questions": {
 			"type": "array",
@@ -20,9 +20,6 @@
 		}
 	},
 	"required": ["level", "questions", "quiz_title"],
-	
-		
-		
 
 	"Question": {
 		"type": "object",
@@ -33,26 +30,25 @@
 			"code": {
 				"type": "string"
 			},
-			"mp_choice_answers": {
+			"mp_choice_options": {
 				"type": "array",
 				"items": {
 					"type": "string",
-					"minItems": 2,
-					"maxItems": 4
+					"minItems": 2
 				}
 			},
 			"correct_answer": {
 				"type": "string",
-				"enum": ["A", "B", "C", "E"]
+				"enum": ["A", "B", "C", "D"]
 			},
-			"explanation": {
+			"hint": {
 				"type": "string"
 			},
 			"question_score": {
 				"type": "integer"
 			}
 		},
-		"required": ["question_text", "mp_choice_answers", "correct_answer", "question_score"],
+		"required": ["question_text", "mp_choice_options", "correct_answer", "question_score"],
 		"additionalProperties": false
 
 
