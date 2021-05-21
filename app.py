@@ -390,7 +390,7 @@ def get_quiz(source, question_nr):
     print(q_nr <= len(quiz_data['questions']))
     if q_nr <= len(quiz_data['questions']):
         return render_template('quiz_question.html', quiz=quiz_data,
-                               question=quiz_data['questions'][q_nr - 1].get(q_nr), question_nr=q_nr, menu=render_main_menu('adventures'), lang=lang, username=current_user(request)['username'],auth=TRANSLATIONS.data[lang]['Auth'])
+                               question=quiz_data['questions'][q_nr - 1].get(q_nr), question_nr=q_nr, menu=render_main_menu('adventures'), lang=lang, username=current_user(request)['username'],auth=TRANSLATIONS.data[requested_lang()]['Auth'])
     else:
         return jsonify({'response': 200, 'results': quiz_data})
 
