@@ -1,15 +1,22 @@
 {% extends "quiz.html" %}
 
 {% block question %}
-    <div>
-        <p>Vraag 1 - {{ question.question_text }} </p>
-        <div class="p-4 grid-cols-2 gap-4 bg-blue-100 bg-stripes rounded-md">
+    <div class="p-8">
+        <p>Vraag {{ question_nr }} - {{ question.question_text }} </p>
+        <div class="grid grid-rows-2 gap-4S rounded-t-xl">
             {% for row in question.mp_choice_options %}
-
-                <button class="bg-blue-500 rounded-md h-12 items-center justify-center text-white">{{ row.code }}</button>
-
+                <div class="bg-blue-50 p-10">
+                    <div class="border-blue-600 p-4 border-8 rounded-lg shadow-lg bg-gradient-to-r from-green-200 to-blue-400">
+                        <label class="inline-flex items-center"> {{ char_array[loop.index - 1] }} <input type="radio"
+                                                                                                         name="button+qst{{ question_nr }}"
+                                                                                                         value="{{ question_nr }}-{{ loop.index - 1 }}"
+                                                                                                         class="class form-radio h-12 w-12"><span
+                                class="ml-2">{{ row.code }}</span></label>
+                    </div>
+                </div>
             {% endfor %}
         </div>
-    <button class="green-btn ml-1" onclick="window.location = '/quiz/quiz_questions/{{ question_nr+1}}'"> Ga naar vraag {{ question_nr+1}}</button>
     </div>
+    <button class="green-btn ml-1" onclick="window.location = '/quiz/quiz_questions/{{ question_nr }}/feedback'"> Ga
+        naar het antwoord van vraag {{ question_nr }}</button>
 {% endblock %}

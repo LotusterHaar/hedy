@@ -379,20 +379,48 @@ def programs_page(request):
                            username=username, current_page='programs', from_user=from_user)
 
 
+# Quiz mode
 # Fill in the filename as source
 @app.route('/quiz/<source>/<question_nr>', methods=['GET'])
 def get_quiz(source, question_nr):
-
     # Reading yaml file
     quiz_data = load_yaml(f'coursedata/quiz/{source}.yaml')
 
     q_nr = int(question_nr)
     print(q_nr <= len(quiz_data['questions']))
     if q_nr <= len(quiz_data['questions']):
+        question = quiz_data['questions'][q_nr - 1].get(q_nr)
+        print(len(question['mp_choice_options']))
+        char_array = []
+        for i in range(len(question['mp_choice_options'])):
+            char_array.append(chr(ord('@') + (i + 1)))
+            print(char_array)
         return render_template('quiz_question.html', quiz=quiz_data,
-                               question=quiz_data['questions'][q_nr - 1].get(q_nr), question_nr=q_nr, menu=render_main_menu('adventures'), lang=lang, username=current_user(request)['username'],auth=TRANSLATIONS.data[requested_lang()]['Auth'])
+                               question=quiz_data['questions'][q_nr - 1].get(q_nr), question_nr=q_nr,
+                               char_array=char_array,
+                               menu=render_main_menu('adventures'), lang=lang,
+                               username=current_user(request)['username'],
+                               auth=TRANSLATIONS.data[requested_lang()]['Auth'])
     else:
         return jsonify({'response': 200, 'results': quiz_data})
+
+
+@app.route('/quiz/<source>/<question_nr>/feedback', methods=['GET'])
+def get_answer(source, question_nr):
+    # Reading yaml file
+    quiz_data = load_yaml(f'coursedata/quiz/{source}.yaml')
+
+    q_nr = int(question_nr)
+    print(q_nr <= len(quiz_data['questions']))
+    if q_nr <= len(quiz_data['questions']):
+        return render_template('feedback.html', quiz=quiz_data,
+                               question=question, question_nr=q_nr,
+                               menu=render_main_menu('adventures'), lang=lang,
+                               username=current_user(request)['username'],
+                               auth=TRANSLATIONS.data[requested_lang()]['Auth'])
+    else:
+        return jsonify({'response': 200, 'results': quiz_data})
+
 
 # Adventure mode
 @app.route('/hedy/adventures', methods=['GET'])
