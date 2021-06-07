@@ -405,22 +405,19 @@ def get_quiz(source, question_nr):
         return jsonify({'response': 200, 'results': quiz_data})
 
 
-@app.route('/quiz/<source>/<question_nr>/feedback', methods=['GET'])
+@app.route('/quiz/<source>/<question_nr>/feedback/', methods=['GET','POST'])
 def get_answer(source, question_nr):
     # Reading yaml file
     quiz_data = load_yaml(f'coursedata/quiz/{source}.yaml')
-
     q_nr = int(question_nr)
-    print(q_nr <= len(quiz_data['questions']))
     if q_nr <= len(quiz_data['questions']):
-        return render_template('feedback.html', quiz=quiz_data,
-                               question=question, question_nr=q_nr,
+        return render_template('feedback.html', quiz=quiz_data, question=quiz_data['questions'][q_nr - 1].get(q_nr),
+                               question_nr=q_nr,
                                menu=render_main_menu('adventures'), lang=lang,
                                username=current_user(request)['username'],
                                auth=TRANSLATIONS.data[requested_lang()]['Auth'])
     else:
         return jsonify({'response': 200, 'results': quiz_data})
-
 
 # Adventure mode
 @app.route('/hedy/adventures', methods=['GET'])

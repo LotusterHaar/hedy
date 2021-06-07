@@ -2,8 +2,9 @@
 
 {% block question %}
     <div>
-        <p>Vraag {{question_nr }} - {{ question.question_text }} </p>
+        <p>Vraag {{ question_nr }} - {{ question.question_text }} </p>
         <p> Goed! </p>
-    <button class="green-btn ml-1" onclick="window.location = '/quiz/quiz_questions/{{ question_nr+1}}'"> Ga naar vraag {{ question_nr+1}}</button>
+        <button class="green-btn ml-1" onclick="window.location = '/quiz/quiz_questions/{{ question_nr + 1 }}'"> Ga naar
+            vraag {{ question_nr + 1}}</button>
     </div>
 {% endblock %}
