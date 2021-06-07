@@ -378,6 +378,9 @@ def programs_page(request):
                            ui=ui, auth=TRANSLATIONS.data[requested_lang()]['Auth'], programs=programs,
                            username=username, current_page='programs', from_user=from_user)
 
+@app.route('/quiz/start/<level>', methods=['GET'])
+def get_quiz_start(level):
+    return render_template('startquiz.html', level=level)
 
 # Quiz mode
 # Fill in the filename as source

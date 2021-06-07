@@ -187,7 +187,7 @@
         {% endif %}
         {% if next_level %}
           {% if not adventure_name %}
-            <button class="green-btn ml-1" onclick="window.location = '{{ hedy_link(next_level, 1) }}';">{{advance_button}} {{ next_level }}</button>
+            <button class="green-btn ml-1" onclick="window.location = '/quiz/start/{{level}}';">Ga naar de quiz van level {{ level }}</button>
           {% else %}
             <button class="green-btn" onclick="window.location = '{{ localize_link ('/hedy/adventures/' + adventure_name + '/' + (next_level|string))}}';">{{advance_button}} {{ next_level }}</button>
           {% endif %}
