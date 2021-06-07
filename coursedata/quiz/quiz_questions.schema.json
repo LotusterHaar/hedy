@@ -3,10 +3,6 @@
 	"type": "object",
 	"additionalProperties": false,
 	"properties": {
-		"quiz_title": {
-			"type": "string",
-			"description": "Short title of the quiz"
-		},
 		"level": {
 			"type": "integer",
 			"description": "Level number of the quiz"
@@ -50,7 +46,5 @@
 		},
 		"required": ["question_text", "mp_choice_options", "correct_answer", "question_score"],
 		"additionalProperties": false
-
-
 	}
 }

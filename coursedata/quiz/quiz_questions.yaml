@@ -1,5 +1,4 @@
-﻿quiz_title: "Quiz level 1"
-level: 1
+﻿level: 1
 questions:
     - 1:
             question_text: "Hoe vraag je: Wat is je lievelingskleur?"
@@ -9,7 +8,7 @@ questions:
               - {option_text:, code: "ask print Wat is je lievelingskleur?", feedback: "ask print al iets"}
               - {option_text:, code: "ask Wat is je lievelingskleur?", feedback: "Goed zo!"}
               - {option_text:, code:    "echo Wat is je lievelingskleur?", feedback: "Goed zo!"}
-            correct_answer: C
+            correct_answer: "C"
             hint: "met 'ask' kun je iets vragen"
             question_score: 5
     - 2:
@@ -20,6 +19,6 @@ questions:
               - {option_text:, code:  "print Ik heet is voornaam", feedback: "Voornaam moet eerst opgeslagen worden in een variabele"}
               - {option_text:, code:  "voornaam is Jan.\n print Ik heet is voornaam", feedback: "Sla voornaam op in een variabele voor print"}
               - {option_text:, code:     "voornaam is Jan\n print Ik heet voornaam", feedback: "Wat knap, correct!"}
-            correct_answer: D
+            correct_answer: "D"
             hint: "Een woord een naam geven met `is`."
             question_score: 10

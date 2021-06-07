@@ -10,7 +10,7 @@
                     <div class="border-blue-600 p-4 border-8 rounded-lg shadow-lg bg-gradient-to-r from-green-200 to-blue-400">
                         <label class="inline-flex items-center"> {{ char_array[loop.index - 1] }} <input type="radio"
                                                                                                          name="_option"
-                                                                                                         value="{{ question_nr }}-{{ loop.index - 1 }}"
+                                                                                                         value="{{ question_nr }}-{{ char_array[loop.index - 1]}}"
                                                                                                          class="class form-radio h-12 w-12"><span
                                 class="ml-2">{{ row.code }}</span></label>
                     </div>
