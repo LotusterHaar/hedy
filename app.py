@@ -378,9 +378,11 @@ def programs_page(request):
                            ui=ui, auth=TRANSLATIONS.data[requested_lang()]['Auth'], programs=programs,
                            username=username, current_page='programs', from_user=from_user)
 
+
 @app.route('/quiz/start/<level>', methods=['GET'])
 def get_quiz_start(level):
     return render_template('startquiz.html', level=level)
+
 
 # Quiz mode
 # Fill in the filename as source
@@ -406,9 +408,20 @@ def get_quiz(source, question_nr):
     else:
         return jsonify({'response': 200, 'results': quiz_data})
 
+# @app.route('/enable_submit', methods=["POST"])
+def enable_submit():
+    print("radio clicked")
+    sbmt = document.getElementById('submit-button')
+    print(sbmt)
+    if request.form["_option"]:
+        sbmt.disabled = False
+    else:
+        sbmt.disabled = True
+
+
 @app.route('/submit_answer/<source>/<question_nr>', methods=["POST"])
 def submit_answer(source, question_nr):
-    option = request.form["_option"]
+    option = request.form["radio_option"]
     print('option', option)
 
     quiz_data = load_yaml(f'coursedata/quiz/{source}.yaml')
@@ -416,11 +429,11 @@ def submit_answer(source, question_nr):
     if q_nr <= len(quiz_data['questions']):
         return render_template('feedback.html', quiz=quiz_data, question=quiz_data['questions'][q_nr - 1].get(q_nr),
                                question_nr=q_nr,
-                               option = option,
+                               option=option,
                                menu=render_main_menu('adventures'), lang=lang,
                                username=current_user(request)['username'],
                                auth=TRANSLATIONS.data[requested_lang()]['Auth'])
-    else: # show a different page for after the last question
+    else:  # show a different page for after the last question
         return jsonify({'response': 200, 'results': quiz_data})
 
 
