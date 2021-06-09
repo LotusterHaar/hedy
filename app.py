@@ -69,6 +69,7 @@ ONLINE_MASTERS_COURSE = courses.Course('online_masters', 'nl', LEVEL_DEFAULTS['n
 
 TRANSLATIONS = hedyweb.Translations()
 
+TOTAL_SCORE = 0
 
 def load_adventures_in_all_languages():
     adventures = {}
@@ -382,6 +383,8 @@ def programs_page(request):
 
 @app.route('/quiz/start/<level>', methods=['GET'])
 def get_quiz_start(level):
+    global TOTAL_SCORE
+    TOTAL_SCORE = 0
     return render_template('startquiz.html', level=level, menu=render_main_menu('adventures'), lang=lang,
                                username=current_user(request)['username'],
                                auth=TRANSLATIONS.data[requested_lang()]['Auth'])
@@ -394,7 +397,6 @@ def get_quiz(source, question_nr):
 
     # Reading yaml file
     quiz_data = load_yaml(f'coursedata/quiz/{source}.yaml')
-    ui = TRANSLATIONS.data[requested_lang()]['ui']
 
     # set globals
     try:
@@ -419,8 +421,8 @@ def get_quiz(source, question_nr):
                                username=current_user(request)['username'],
                                auth=TRANSLATIONS.data[requested_lang()]['Auth'])
     else:
-        return render_template('endquiz.html', total_score=100,  menu=render_main_menu('adventures'), lang=lang,
-                               quiz=quiz_data,level=level+1, ui=ui, next_assignment = 1,  username=current_user(request)['username'],
+        return render_template('endquiz.html', total_score=TOTAL_SCORE,  menu=render_main_menu('adventures'), lang=lang,
+                               quiz=quiz_data,level=level+1, next_assignment = 1,  username=current_user(request)['username'],
                                auth=TRANSLATIONS.data[requested_lang()]['Auth'])
 
 def enable_submit():
@@ -440,8 +442,13 @@ def submit_answer(source, question_nr):
 
     quiz_data = load_yaml(f'coursedata/quiz/{source}.yaml')
     q_nr = int(question_nr)
+    question = quiz_data['questions'][q_nr - 1].get(q_nr)
+    if question['correct_answer'] in option:
+        global TOTAL_SCORE
+        TOTAL_SCORE= TOTAL_SCORE + question['question_score']
+
     if q_nr <= len(quiz_data['questions']):
-        return render_template('feedback.html', quiz=quiz_data, question=quiz_data['questions'][q_nr - 1].get(q_nr),
+        return render_template('feedback.html', quiz=quiz_data, question=question,
                                question_nr=q_nr,
                                option=option,
                                menu=render_main_menu('adventures'), lang=lang,
