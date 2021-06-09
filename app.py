@@ -70,7 +70,7 @@ ONLINE_MASTERS_COURSE = courses.Course('online_masters', 'nl', LEVEL_DEFAULTS['n
 TRANSLATIONS = hedyweb.Translations()
 
 TOTAL_SCORE = 0
-
+CORRECT = 0
 def load_adventures_in_all_languages():
     adventures = {}
     for lang in ALL_LANGUAGES.keys():
@@ -383,8 +383,9 @@ def programs_page(request):
 
 @app.route('/quiz/start/<level>', methods=['GET'])
 def get_quiz_start(level):
-    global TOTAL_SCORE
+    global TOTAL_SCORE, CORRECT
     TOTAL_SCORE = 0
+    CORRECT = 0
     return render_template('startquiz.html', level=level, menu=render_main_menu('adventures'), lang=lang,
                                username=current_user(request)['username'],
                                auth=TRANSLATIONS.data[requested_lang()]['Auth'])
@@ -416,12 +417,13 @@ def get_quiz(source, question_nr):
             char_array.append(chr(ord('@') + (i + 1)))
         return render_template('quiz_question.html', quiz=quiz_data, source=source,
                                question=quiz_data['questions'][q_nr - 1].get(q_nr), question_nr=q_nr,
+                               correct=CORRECT,
                                char_array=char_array,
                                menu=render_main_menu('adventures'), lang=lang,
                                username=current_user(request)['username'],
                                auth=TRANSLATIONS.data[requested_lang()]['Auth'])
     else:
-        return render_template('endquiz.html', total_score=TOTAL_SCORE,  menu=render_main_menu('adventures'), lang=lang,
+        return render_template('endquiz.html', correct=CORRECT,  menu=render_main_menu('adventures'), lang=lang,
                                quiz=quiz_data,level=level+1, next_assignment = 1,  username=current_user(request)['username'],
                                auth=TRANSLATIONS.data[requested_lang()]['Auth'])
 
@@ -444,13 +446,15 @@ def submit_answer(source, question_nr):
     q_nr = int(question_nr)
     question = quiz_data['questions'][q_nr - 1].get(q_nr)
     if question['correct_answer'] in option:
-        global TOTAL_SCORE
+        global TOTAL_SCORE, CORRECT
         TOTAL_SCORE= TOTAL_SCORE + question['question_score']
+        CORRECT = CORRECT + 1
 
     if q_nr <= len(quiz_data['questions']):
         return render_template('feedback.html', quiz=quiz_data, question=question,
                                questions = quiz_data['questions'],
                                question_nr=q_nr,
+                               correct = CORRECT,
                                option=option,
                                menu=render_main_menu('adventures'), lang=lang,
                                username=current_user(request)['username'],

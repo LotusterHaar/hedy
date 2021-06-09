@@ -2,6 +2,7 @@
 
 {% block question %}
     <div>
+
         <p>Vraag {{ question_nr }} - {{ question.question_text }} </p>
         <p>{{ 'Goed' if question.correct_answer in option else 'Fout' }}</p>
 
