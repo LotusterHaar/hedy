@@ -449,6 +449,7 @@ def submit_answer(source, question_nr):
 
     if q_nr <= len(quiz_data['questions']):
         return render_template('feedback.html', quiz=quiz_data, question=question,
+                               questions = quiz_data['questions'],
                                question_nr=q_nr,
                                option=option,
                                menu=render_main_menu('adventures'), lang=lang,

@@ -3,8 +3,15 @@
 {% block question %}
     <div>
         <p>Vraag {{ question_nr }} - {{ question.question_text }} </p>
-        <p>{{'Goed' if question.correct_answer in option else 'Fout'}}</p>
-        <button class="green-btn ml-1" onclick="window.location = '/quiz/quiz_questions/{{ question_nr + 1 }}'"> Ga naar
-            vraag {{ question_nr + 1}}</button>
+        <p>{{ 'Goed' if question.correct_answer in option else 'Fout' }}</p>
+
+        {% if question_nr < questions|length %}
+            <button class="green-btn ml-1" onclick="window.location = '/quiz/quiz_questions/{{ question_nr + 1 }}'"> Ga
+                naar vraag {{ question_nr + 1 }}</button>
+        {% else %}
+            <button class="green-btn ml-1" onclick="window.location = '/quiz/quiz_questions/{{ question_nr + 1 }}'"> Ga
+                naar de resultaten van de quiz </button>
+        {% endif %}
+
     </div>
 {% endblock %}
