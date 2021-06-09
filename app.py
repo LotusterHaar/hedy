@@ -379,17 +379,30 @@ def programs_page(request):
                            username=username, current_page='programs', from_user=from_user)
 
 
+
 @app.route('/quiz/start/<level>', methods=['GET'])
 def get_quiz_start(level):
-    return render_template('startquiz.html', level=level)
+    return render_template('startquiz.html', level=level, menu=render_main_menu('adventures'), lang=lang,
+                               username=current_user(request)['username'],
+                               auth=TRANSLATIONS.data[requested_lang()]['Auth'])
 
 
 # Quiz mode
 # Fill in the filename as source
 @app.route('/quiz/<source>/<question_nr>', methods=['GET'])
 def get_quiz(source, question_nr):
+
     # Reading yaml file
     quiz_data = load_yaml(f'coursedata/quiz/{source}.yaml')
+    ui = TRANSLATIONS.data[requested_lang()]['ui']
+
+    # set globals
+    try:
+        g.level = level = quiz_data['level']
+    except:
+        return 'No such Hedy level!', 404
+    g.lang = lang = requested_lang()
+    g.prefix = '/hedy'
 
     q_nr = int(question_nr)
     print(q_nr <= len(quiz_data['questions']))
@@ -406,9 +419,10 @@ def get_quiz(source, question_nr):
                                username=current_user(request)['username'],
                                auth=TRANSLATIONS.data[requested_lang()]['Auth'])
     else:
-        return jsonify({'response': 200, 'results': quiz_data})
+        return render_template('endquiz.html', total_score=100,  menu=render_main_menu('adventures'), lang=lang,
+                               quiz=quiz_data,level=level+1, ui=ui, next_assignment = 1,  username=current_user(request)['username'],
+                               auth=TRANSLATIONS.data[requested_lang()]['Auth'])
 
-# @app.route('/enable_submit', methods=["POST"])
 def enable_submit():
     print("radio clicked")
     sbmt = document.getElementById('submit-button')

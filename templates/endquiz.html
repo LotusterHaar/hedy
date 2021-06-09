@@ -1,0 +1,11 @@
+{% extends "quiz.html" %}
+
+{% block question %}
+    <div>
+        <h1> Einde van de quiz!</h1>
+        <h3>Score </h3>
+        <h2>{{ total_score|string }}</h2>
+    </div>
+    <button class="green-btn ml-1"
+            onclick="window.location = '{{ hedy_link(level, next_assignment) }}';">Ga naar level {{ level }} </button>
+{% endblock %}
