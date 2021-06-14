@@ -14,25 +14,25 @@
     <body>
     <div class="p-8">
         <p>Vraag {{ question_nr }} - {{ question.question_text }} </p>
-        <div class="grid grid-rows-2 gap-4S rounded-t-xl">
-            <form action='/submit_answer/{{ source }}/{{ question_nr }}' method="POST">
+
+        <form action='/submit_answer/{{ source }}/{{ question_nr }}' method="POST">
+            <div class="grid grid-rows-2 gap-4S rounded-t-xl radio-block">
                 {% for row in question.mp_choice_options %}
-                    <div class="bg-blue-50 p-10">
-                        <div class="border-blue-600 p-4 border-8 rounded-lg shadow-lg bg-gradient-to-r from-green-200 to-blue-400">
-                            <label class="inline-flex items-center"> {{ char_array[loop.index - 1] }} <input
-                                    type="radio"
-                                    name="radio_option"
-                                    value="{{ question_nr }}-{{ char_array[loop.index - 1] }}"
-                                    class="class form-radio h-12 w-12">
-                                <span class="ml-2">{{ row.code }}</span>
-                            </label>
-                        </div>
+                    <div class="p-8 border-blue-600 p-4 border-4 rounded-lg shadow-lg">
+                        <label class="inline-flex items-center"> {{ char_array[loop.index - 1] }} <input
+                                type="radio"
+                                name="radio_option"
+                                value="{{ question_nr }}-{{ char_array[loop.index - 1] }}"
+                                class="class form-radio h-12 w-12">
+                            <span class="ml-2"><code>{{ row.code }}</code></span>
+                        </label>
                     </div>
                 {% endfor %}
-                <input class="green-btn ml-1" type="submit" name="submit-button"
-                       value="Ga naar het antwoord van vraag {{ question_nr }}" disabled="disabled">
-            </form>
-        </div>
+            </div>
+            <input class="green-btn ml-1" type="submit" name="submit-button"
+                   value="Ga naar het antwoord van vraag {{ question_nr }}" disabled="disabled">
+        </form>
+
     </div>
     </body>
 

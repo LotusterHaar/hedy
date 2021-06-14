@@ -7,12 +7,12 @@ questions:
               - {option_text:, code: "print Wat is je lievelingskleur?", feedback: "Met print print je iets"}
               - {option_text:, code: "ask print Wat is je lievelingskleur?", feedback: "ask print al iets"}
               - {option_text:, code: "ask Wat is je lievelingskleur?", feedback: "Goed zo!"}
-              - {option_text:, code:    "echo Wat is je lievelingskleur?", feedback: "Goed zo!"}
+              - {option_text:, code: "echo Wat is je lievelingskleur?", feedback: "Goed zo!"}
             correct_answer: "C"
             hint: "met 'ask' kun je iets vragen"
             question_score: 5
     - 2:
-            question_text: "Hoe print je een voornaam een naam die geprint wordt" 
+            question_text: "Hoe print je een voornaam een naam die geprint wordt?"
             code: "..."
             mp_choice_options:
               - {option_text:, code: "voornaam =  Jan\n print Ik heet voornaam", feedback: "= is geen commando"}
