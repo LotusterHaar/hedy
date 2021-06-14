@@ -39,3 +39,15 @@ img {
 input:disabled{
     background-color: darkgray !important;
 }
+
+.radio-block div{
+    margin: 1.5rem;
+}
+.radio-block div:nth-child(even){
+    background-color: #93C5FD;
+}
+
+.radio-block div:nth-child(odd) {
+    background-color: #6EE7B7;
+    border-color: #2d9068!important;
+}

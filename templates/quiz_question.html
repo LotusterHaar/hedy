@@ -16,10 +16,10 @@
         <p>Vraag {{ question_nr }} - {{ question.question_text }} </p>
 
         <form action='/submit_answer/{{ source }}/{{ question_nr }}' method="POST">
-            <div class="grid grid-rows-2 gap-4S rounded-t-xl radio-block">
+            <div class="grid grid-rows-2 gap-3 rounded-t-xl radio-block">
                 {% for row in question.mp_choice_options %}
-                    <div class="p-8 border-blue-600 p-4 border-4 rounded-lg shadow-lg">
-                        <label class="inline-flex items-center"> {{ char_array[loop.index - 1] }} <input
+                    <div class="p-4 border-blue-600 p-4 border-4 rounded-lg shadow-lg">
+                        <label class="inline-flex items-center"> <p class="text-6xl font-bold mr-4">{{ char_array[loop.index - 1] }}</p></p> <input
                                 type="radio"
                                 name="radio_option"
                                 value="{{ question_nr }}-{{ char_array[loop.index - 1] }}"
