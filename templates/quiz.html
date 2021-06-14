@@ -3,7 +3,7 @@
 {% block body %}
     <div class="px-8 bg-blue-200">
         <div class="tracking-wide text-xl font-thin">Level {{ quiz.level }} -</div>
-        <div >Vraag: {{ question_nr }} van de {{ questions|length }}<br></div>
+        <div>Vraag: {{ question_nr }} van de {{ questions|length }}<br></div>
         <div>Aantal vragen goed: {{ correct }} van de {{ questions|length }} <br></div>
     </div>
     {% block question %}

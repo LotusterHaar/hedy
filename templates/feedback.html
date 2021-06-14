@@ -3,9 +3,9 @@
 {% block question %}
     <div>
 
-        <p>Vraag {{ question_nr }} - {{ question.question_text }} </p>
-        <p>{{ 'Goed' if question.correct_answer in option else 'Fout' }}</p>
-
+        <p><b><i>Vraag {{ question_nr }} - {{ question.question_text }} </i></b></p>
+        <h4>{{ 'Goed' if question.correct_answer in option else 'Fout' }}</h4>
+        <p><i>{{question.mp_choice_options[index_option].feedback}}</i></p>
         {% if question_nr < questions|length %}
             <button class="green-btn ml-1" onclick="window.location = '/quiz/quiz_questions/{{ question_nr + 1 }}'"> Ga
                 naar vraag {{ question_nr + 1 }}</button>

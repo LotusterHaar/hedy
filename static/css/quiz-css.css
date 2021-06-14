@@ -1,0 +1,41 @@
+.flex-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.title-block {
+    background-color: #4299e1;
+}
+
+.start-quiz-title {
+    text-align: center;
+    color: white;
+    font-weight: bold;
+}
+
+.start-quiz-subtitle {
+    text-align: center;
+    color: white;
+}
+
+.button-bar {
+    display: flex;
+    background-color: #c6f6d5 !important;
+    justify-content: space-between !important;
+
+}
+
+.center-picture {
+    background-color: lightblue !important;
+    display: flex !important;
+    text-align: center;
+    justify-content: center !important;
+}
+
+img {
+    width: 60%;
+}
+
+input:disabled{
+    background-color: darkgray !important;
+}

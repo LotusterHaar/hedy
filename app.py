@@ -384,9 +384,11 @@ def programs_page(request):
 @app.route('/quiz/start/<level>', methods=['GET'])
 def get_quiz_start(level):
     global TOTAL_SCORE, CORRECT
+    g.lang = lang = requested_lang()
+    g.prefix = '/hedy'
     TOTAL_SCORE = 0
     CORRECT = 0
-    return render_template('startquiz.html', level=level, menu=render_main_menu('adventures'), lang=lang,
+    return render_template('startquiz.html', level=level, next_assignment = 1, menu=render_main_menu('adventures'), lang=lang,
                                username=current_user(request)['username'],
                                auth=TRANSLATIONS.data[requested_lang()]['Auth'])
 
@@ -416,6 +418,7 @@ def get_quiz(source, question_nr):
         for i in range(len(question['mp_choice_options'])):
             char_array.append(chr(ord('@') + (i + 1)))
         return render_template('quiz_question.html', quiz=quiz_data, source=source,
+                               questions=quiz_data['questions'],
                                question=quiz_data['questions'][q_nr - 1].get(q_nr), question_nr=q_nr,
                                correct=CORRECT,
                                char_array=char_array,
@@ -423,7 +426,7 @@ def get_quiz(source, question_nr):
                                username=current_user(request)['username'],
                                auth=TRANSLATIONS.data[requested_lang()]['Auth'])
     else:
-        return render_template('endquiz.html', correct=CORRECT,  menu=render_main_menu('adventures'), lang=lang,
+        return render_template('endquiz.html', correct=CORRECT, total_score=TOTAL_SCORE,  menu=render_main_menu('adventures'), lang=lang,
                                quiz=quiz_data,level=level+1, next_assignment = 1,  username=current_user(request)['username'],
                                auth=TRANSLATIONS.data[requested_lang()]['Auth'])
 
@@ -445,6 +448,7 @@ def submit_answer(source, question_nr):
     quiz_data = load_yaml(f'coursedata/quiz/{source}.yaml')
     q_nr = int(question_nr)
     question = quiz_data['questions'][q_nr - 1].get(q_nr)
+    index_option = ord(option.split("-")[1])-65
     if question['correct_answer'] in option:
         global TOTAL_SCORE, CORRECT
         TOTAL_SCORE= TOTAL_SCORE + question['question_score']
@@ -456,6 +460,7 @@ def submit_answer(source, question_nr):
                                question_nr=q_nr,
                                correct = CORRECT,
                                option=option,
+                               index_option=index_option,
                                menu=render_main_menu('adventures'), lang=lang,
                                username=current_user(request)['username'],
                                auth=TRANSLATIONS.data[requested_lang()]['Auth'])
