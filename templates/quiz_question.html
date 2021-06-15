@@ -12,7 +12,7 @@
         </script>
     </head>
     <body>
-    <div class="p-8">
+    <div>
         <div class="text-green-900 text-2xl text-center flex flex-row justify-center font-slab"><p
                 class="font-semibold">Vraag {{ question_nr }} </p>
             <p> / {{ questions|length }} </p></div>
@@ -34,6 +34,7 @@
                 {% endfor %}
             </div>
             <div class="p-10 button-bar">
+                <div></div>
                 <input class="green-btn ml-1" type="submit" name="submit-button"
                        value="Ga naar het antwoord van vraag {{ question_nr }}" disabled="disabled">
             </div>
