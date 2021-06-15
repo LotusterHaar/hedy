@@ -13,13 +13,17 @@
     </head>
     <body>
     <div class="p-8">
-        <p>Vraag {{ question_nr }} - {{ question.question_text }} </p>
+        <div class="text-green-900 text-2xl text-center flex flex-row justify-center font-slab"><p
+                class="font-semibold">Vraag {{ question_nr }} </p>
+            <p> / {{ questions|length }} </p></div>
+        <p class="italic text-3xl font-bold tracking-wide text-blue-900 text-center font-slab"> {{ question.question_text }} </p>
 
         <form action='/submit_answer/{{ source }}/{{ question_nr }}' method="POST">
             <div class="grid grid-rows-2 gap-3 rounded-t-xl radio-block">
                 {% for row in question.mp_choice_options %}
                     <div class="p-4 border-blue-600 p-4 border-4 rounded-lg shadow-lg">
-                        <label class="inline-flex items-center"> <p class="text-6xl font-bold mr-4">{{ char_array[loop.index - 1] }}</p></p> <input
+                        <label class="inline-flex items-center"><p
+                                class="text-6xl font-bold mr-4">{{ char_array[loop.index - 1] }}</p></p> <input
                                 type="radio"
                                 name="radio_option"
                                 value="{{ question_nr }}-{{ char_array[loop.index - 1] }}"
@@ -29,8 +33,10 @@
                     </div>
                 {% endfor %}
             </div>
-            <input class="green-btn ml-1" type="submit" name="submit-button"
-                   value="Ga naar het antwoord van vraag {{ question_nr }}" disabled="disabled">
+            <div class="p-10 button-bar">
+                <input class="green-btn ml-1" type="submit" name="submit-button"
+                       value="Ga naar het antwoord van vraag {{ question_nr }}" disabled="disabled">
+            </div>
         </form>
 
     </div>
