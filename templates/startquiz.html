@@ -2,14 +2,14 @@
 
 {% block body %}
         <div class="flex-container">
-            <div class="center-picture p-8"><img src="{{ static('/images/quiz_blackboard.jpg') }}" alt="quiz_logo"/>
+            <div class="center-picture p-10"><img src="{{ static('/images/quiz_blackboard.jpg') }}" alt="quiz_logo"/>
             </div>
-            <div class="title-block">
+            <div class="title-block p-8 border-t-8 border-blue-600">
                 <h1 class="start-quiz-title">Start de Hedy Quiz</h1>
                 <h2 class="start-quiz-subtitle"><i> Level {{ level }} </i></h2>
             </div>
         </div>
-        <div class="p-10 button-bar">
+        <div class="p-10 button-bar border-t-8 border-green-600 ">
             <button class="green-btn"
                     onclick="window.location = '{{ hedy_link(level, next_assignment) }}';">Ga terug naar
                 level {{ level }} </button>
